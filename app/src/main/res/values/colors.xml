@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="TextColor">#FF000000</color>
+    <color name="mainColor">#0E3D76</color>
+    <color name="mainColor2">#608BC1</color>
+    <color name="filledBox">#D6E3FD</color>
+    <color name="search">#F2F2F2</color>
+    <color name="grey">#a6a6a6</color>
+    <color name="login">#EDA011</color>
+
+    <color name="main_text_color">#070707</color>
+    <color name="search_box">#BDBABA</color>
+</resources>

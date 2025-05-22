@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Deportes2" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:textColor">@color/main_text_color</item>
+        <item name="searchBoxColor">@color/search_box</item>
+    </style>
+
+    <style name="Theme.Deportes2" parent="Base.Theme.Deportes2" />
+</resources>

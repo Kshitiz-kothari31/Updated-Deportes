@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sports_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".sports">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sports_Constraintlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            style="@style/CustomSearchViewStyle"
+            android:layout_width="294dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/searchbox"
+            android:focusable="false"
+            app:closeIcon="@drawable/baseline_clear_24"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.47"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/sports_Constraintlayout"
+            app:queryHint="Search"
+            app:searchIcon="@drawable/baseline_search_24" />
+
+        <TextView
+            android:id="@+id/viewallbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="View all"
+            android:textColor="?attr/android:textColor"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.183"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <RelativeLayout
+            android:id="@+id/FootballLayout"
+            android:layout_width="138dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/sports_boxes"
+            app:layout_constraintEnd_toStartOf="@+id/basketballLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewallbtn">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/footballimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/football" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/footballText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="16dp"
+            android:text="Football"
+            android:textColor="?attr/android:textColor"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/FootballLayout" />
+
+        <RelativeLayout
+            android:id="@+id/basketballLayout"
+            android:layout_width="138dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="130dp"
+            android:background="@drawable/sports_boxes"
+            app:layout_constraintBottom_toTopOf="@+id/volleyballLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/FootballLayout"
+            app:layout_constraintTop_toBottomOf="@+id/viewallbtn"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/basketballimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/basketball" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/basketballText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="70dp"
+            android:text="Basketball"
+            android:textColor="?attr/android:textColor"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/basketballLayout" />
+
+        <RelativeLayout
+            android:id="@+id/TableTenisLayout"
+            android:layout_width="138dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/sports_boxes"
+            app:layout_constraintEnd_toStartOf="@+id/volleyballLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/footballText">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/tabletenisimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/tabletenis" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tabletenisText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="0dp"
+            android:text="Table Tenis"
+            android:textStyle="bold"
+            android:textColor="?attr/android:textColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TableTenisLayout" />
+
+
+        <RelativeLayout
+            android:id="@+id/volleyballLayout"
+            android:layout_width="145dp"
+            android:layout_height="123dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="130dp"
+            android:background="@drawable/sports_boxes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/TableTenisLayout"
+            app:layout_constraintTop_toBottomOf="@+id/basketballText">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/volleyballimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/volleyball" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/volleyballText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="70dp"
+            android:text="Volley Ball"
+            android:textStyle="bold"
+            android:textColor="?attr/android:textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/volleyballLayout" />
+
+        <RelativeLayout
+            android:id="@+id/SwimmingLayout"
+            android:layout_width="138dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/sports_boxes"
+            app:layout_constraintEnd_toStartOf="@+id/BatmintonLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabletenisText">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/swimmingimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/swimmer" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/SwimmingText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="20dp"
+            android:text="Swimming"
+            android:textStyle="bold"
+            android:textColor="?attr/android:textColor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SwimmingLayout" />
+
+        <RelativeLayout
+            android:id="@+id/BatmintonLayout"
+            android:layout_width="145dp"
+            android:layout_height="123dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="130dp"
+            android:background="@drawable/sports_boxes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/volleyballText"
+            app:layout_constraintStart_toEndOf="@+id/SwimmingLayout">
+
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/batmintonimage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/batminton" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/BatmintonText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginBottom="10dp"
+            android:text="Batminton"
+            android:textStyle="bold"
+            android:textColor="?attr/android:textColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BatmintonLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
