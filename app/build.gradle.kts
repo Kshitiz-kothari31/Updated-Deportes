@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -43,6 +44,7 @@ dependencies {
     implementation("com.google.guava:guava:31.0.1-android")
     implementation("org.reactivestreams:reactive-streams:1.0.4")
     implementation(libs.media3.ui)
+    implementation(libs.firebase.auth)
     val fragment_version = "1.6.1"
     implementation("androidx.fragment:fragment:$fragment_version")
     implementation(libs.appcompat)

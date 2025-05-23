@@ -42,7 +42,7 @@
             android:layout_marginEnd="23dp"
             android:layout_toStartOf="@+id/imageView2"
             android:text="Lessons"
-            android:textColor="?attr/android:textColor"
+            android:textColor="?attr/TextColor"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +59,7 @@
             android:layout_marginStart="35dp"
             android:layout_marginTop="10dp"
             android:text="Videos"
-            android:textColor="?attr/android:textColor"
+            android:textColor="?attr/TextColor"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +110,7 @@
                     android:layout_marginLeft="130dp"
                     android:layout_marginTop="20dp"
                     android:text="Passing"
-                    android:textColor="?attr/android:textColor"
+                    android:textColor="?attr/TextColor"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
@@ -142,7 +142,7 @@
                     android:layout_marginLeft="130dp"
                     android:layout_marginTop="20dp"
                     android:text="Shooting"
-                    android:textColor="?attr/android:textColor"
+                    android:textColor="?attr/TextColor"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
@@ -174,7 +174,7 @@
                     android:layout_marginLeft="130dp"
                     android:layout_marginTop="20dp"
                     android:text="Dribbling"
-                    android:textColor="?attr/android:textColor"
+                    android:textColor="?attr/TextColor"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
@@ -206,7 +206,7 @@
                     android:layout_marginLeft="130dp"
                     android:layout_marginTop="20dp"
                     android:text="Footwork"
-                    android:textColor="?attr/android:textColor"
+                    android:textColor="?attr/TextColor"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
@@ -238,7 +238,7 @@
                     android:layout_marginLeft="130dp"
                     android:layout_marginTop="20dp"
                     android:text="Running"
-                    android:textColor="?attr/android:textColor"
+                    android:textColor="?attr/TextColor"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>
@@ -272,7 +272,7 @@
                     android:layout_marginLeft="130dp"
                     android:layout_marginTop="20dp"
                     android:text="Jumping"
-                    android:textColor="?attr/android:textColor"
+                    android:textColor="?attr/TextColor"
                     android:textStyle="bold" />
 
             </androidx.cardview.widget.CardView>

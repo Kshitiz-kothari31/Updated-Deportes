@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="mainColor">#0A42F2</color>
     <color name="main_text_color">#FFFFFF</color>
-    <color name="search_box">#5D5D5D</color>
+    <color name="search_box">#303134</color>
+    <color name="link_color">#0515F8</color>
 </resources>

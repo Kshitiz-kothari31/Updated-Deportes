@@ -2,4 +2,6 @@
 <resources>
     <attr name="TextColor" format="color" />
     <attr name="searchBoxColor" format="color" />
+    <attr name="MainColor" format="color"/>
+    <attr name="Link" format="color"/>
 </resources>

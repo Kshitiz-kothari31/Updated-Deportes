@@ -19,8 +19,9 @@
 
         <ImageView
             android:id="@+id/toolbar_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
             android:layout_gravity="start"
             android:padding="8dp"
             android:src="@drawable/navbaricon" />
@@ -31,16 +32,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Home"
-            android:textColor="?attr/android:textColor"
+            android:textColor="?attr/MainColor"
             android:textSize="18sp" />
 
         <ImageView
             android:id="@+id/toolbar_notification"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="end"
             android:padding="8dp"
-            android:layout_marginRight="11dp"
+            android:layout_marginRight="16dp"
             android:src="@drawable/notificationicon" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -83,6 +84,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="start"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/homeicon"
             android:padding="8dp" />
 
@@ -92,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Home"
-            android:textColor="?attr/android:textColor"
+            android:textColor="?attr/TextColor"
             android:textSize="18sp" />
 
         <ImageView
@@ -100,7 +102,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="end"
-            android:layout_marginRight="11dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/sportsicon"
             android:padding="8dp" />
     </androidx.appcompat.widget.Toolbar>

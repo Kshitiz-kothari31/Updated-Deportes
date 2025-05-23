@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "794836403684",
+    "project_id": "deportes-2",
+    "storage_bucket": "deportes-2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794836403684:android:3d8370ed11ef3ebd56b3f1",
+        "android_client_info": {
+          "package_name": "com.example.deportes2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbkQPgMOJGfLTSi-FJx-RRRtuIzGSFH0g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

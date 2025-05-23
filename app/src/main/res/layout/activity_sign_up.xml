@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deportes"
+            android:textAlignment="center"
+            android:textColor="?attr/MainColor"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="120dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create your account"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="?attr/TextColor"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="40dp"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/login_signup_inputbtn"
+            android:drawablePadding="8dp"
+            android:elevation="10dp"
+            android:hint="email"
+            android:textSize="18sp"
+            android:textColorHint="?attr/TextColor"
+            android:padding="8dp"
+            />
+
+        <EditText
+            android:id="@+id/Password"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/login_signup_inputbtn"
+            android:drawablePadding="8dp"
+            android:elevation="10dp"
+            android:hint="password"
+            android:textSize="18sp"
+            android:textColorHint="?attr/TextColor"
+            android:inputType="textPassword"
+            android:padding="8dp" />
+
+        <EditText
+            android:id="@+id/confirmPassword"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/login_signup_inputbtn"
+            android:drawablePadding="8dp"
+            android:elevation="10dp"
+            android:hint="password"
+            android:textSize="18sp"
+            android:textColorHint="?attr/TextColor"
+            android:inputType="textPassword"
+            android:padding="8dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signupBtn"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/login_signup_btn"
+            android:text="Sign Up"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account!"
+                android:textColor="?attr/TextColor"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/login_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login."
+                android:textColor="?attr/Link"
+                android:textSize="12sp"
+                android:clickable="true"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

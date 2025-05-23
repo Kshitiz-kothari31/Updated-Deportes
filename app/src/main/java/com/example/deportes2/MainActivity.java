@@ -1,6 +1,7 @@
 package com.example.deportes2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.cloudinary.Cloudinary;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment activeFragment;
     ExtendedFloatingActionButton aiBtn;
     TextView toolbarTitle;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SharedPreferences sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE);
+        boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+        if(isFirstTime){
+            startActivity(new Intent(MainActivity.this, Login.class));
+
+            SharedPreferences.Editor editor =  sharedPreferences.edit();
+            editor.putBoolean("isFirstTime", false);
+            editor.apply();
+        }
 
         ImageView homeIcon = findViewById(R.id.bottom_home_icon);
         ImageView sportsIcon = findViewById(R.id.bottom_sports_icon);
