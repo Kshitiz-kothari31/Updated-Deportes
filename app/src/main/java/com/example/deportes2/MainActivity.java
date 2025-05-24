@@ -3,9 +3,12 @@ package com.example.deportes2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,11 +21,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.cloudinary.Cloudinary;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
 
     public Fragment basketballVideosFragment = new fragment_Basketball_videos();
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment activeFragment;
     ExtendedFloatingActionButton aiBtn;
     TextView toolbarTitle;
-    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        SharedPreferences sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE);
-        boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
-        if(isFirstTime){
-            startActivity(new Intent(MainActivity.this, Login.class));
+        SharedPreferences prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String token = prefs.getString("access_token", null);
 
-            SharedPreferences.Editor editor =  sharedPreferences.edit();
-            editor.putBoolean("isFirstTime", false);
-            editor.apply();
+        if(token == null){
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            finish();
         }
 
         ImageView homeIcon = findViewById(R.id.bottom_home_icon);
@@ -128,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }
 
 class CloudinaryManager {

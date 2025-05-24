@@ -31,8 +31,8 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="?attr/TextColor"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="40dp"/>
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"/>
 
         <EditText
             android:id="@+id/email"
@@ -73,7 +73,7 @@
             android:background="@drawable/login_signup_inputbtn"
             android:drawablePadding="8dp"
             android:elevation="10dp"
-            android:hint="password"
+            android:hint="confirm password"
             android:textSize="18sp"
             android:textColorHint="?attr/TextColor"
             android:inputType="textPassword"
