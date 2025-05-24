@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -27,13 +28,16 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     public Fragment basketballVideosFragment = new fragment_Basketball_videos();
+    public Fragment footballVideosFragment = new football_videos();
+
+    Fragment profileFragment = new FullscreenProfileFragment();
+//    Fragment chatFragment = new
     Fragment homeFragment = new HomeCommunity();
     Fragment sportsFragment = new Sports();
-    public Fragment footballVideosFragment = new football_videos();
     Fragment activeFragment;
-    ExtendedFloatingActionButton aiBtn;
+    ExtendedFloatingActionButton aiBtn, addpost;
     TextView toolbarTitle;
-
+    Toolbar topToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView homeIcon = findViewById(R.id.bottom_home_icon);
         ImageView sportsIcon = findViewById(R.id.bottom_sports_icon);
+        ImageView profileIcon = findViewById(R.id.bottom_profile_icon);
+//        ImageView chatIcon = findViewById(R.id.bottom_chat_icon);
+        topToolbar = findViewById(R.id.top_toolbar);
+
         toolbarTitle = findViewById(R.id.toolbar_title);
 
         getSupportFragmentManager().beginTransaction()
@@ -78,15 +86,32 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.main_content, homeFragment, "Home")
                 .commit();
 
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.main_content, profileFragment, "Profile")
+                .hide(profileFragment)
+                .commit();
+
+//        getSupportFragmentManager().beginTransaction()
+//                .add(R.id.main_content, )
+
         activeFragment = homeFragment;
 
         homeIcon.setOnClickListener(v -> {
             switchFragments(homeFragment);
+            topToolbar.setVisibility(View.VISIBLE);
             toolbarTitle.setText("Home");
         });
         sportsIcon.setOnClickListener(v -> {
             switchFragments(sportsFragment);
+            topToolbar.setVisibility(View.VISIBLE);
             toolbarTitle.setText("Sports");
+        });
+
+        int profileIconPrev = R.drawable.profileicon;
+        profileIcon.setOnClickListener(v -> {
+            switchFragments(profileFragment);
+            topToolbar.setVisibility(View.GONE);
+            toolbarTitle.setText("Profile");
         });
 
         aiBtn = findViewById(R.id.aiBtn);
@@ -98,7 +123,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        addpost = findViewById(R.id.addPost);
+        addpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WritePost.class);
+                startActivity(intent);
+
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
+            }
+        });
+
     }
+
+//    SupabaseStorageHelper storageHelper = new SupabaseStorageHelper(MyApplication.supabaseClient);
+//
+//    storageHelper.uploadImage(imageFile, userId, new SupabaseStorageHelper.UploadCallback() {
+//        @Override
+//        public void onSuccess(String imageUrl) {
+//            // Image uploaded! Use imageUrl to create a post or display the image
+//        }
+//
+//        @Override
+//        public void onFailure(Exception e) {
+//            // Handle upload error here
+//            e.printStackTrace();
+//        }
+//    });
 
     public void switchFragments(Fragment targetFragment){
         if(activeFragment != targetFragment){
