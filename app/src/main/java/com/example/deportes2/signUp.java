@@ -143,9 +143,15 @@ public class signUp extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(responseData);
                         String accessToken = jsonObject.getString("access_token");
+                        String userId = jsonObject.getJSONObject("user").getString("id");
 
-                        SharedPreferences prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-                        prefs.edit().putString("access_token", accessToken).apply();
+//                        SharedPreferences prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+//                        prefs.edit().putString("access_token", accessToken).apply();
+
+                        SharedPreferences.Editor editor = getSharedPreferences("AuthPrefs", MODE_PRIVATE).edit();
+                        editor.putString("access_token", accessToken);
+                        editor.putString("user_id", userId);
+                        editor.apply();
 
                         runOnUiThread(() -> {
                             Intent intent = new Intent(signUp.this, MainActivity.class);

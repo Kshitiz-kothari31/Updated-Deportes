@@ -11,9 +11,9 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +33,7 @@ public class Sports extends Fragment {
         if (!isNetworkAvailable()) {
             showInternetDialog();
         }
+
     }
 
     @Override
@@ -40,6 +41,7 @@ public class Sports extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ShapeableImageView football, basketball, tabletenis, volleyball, swimming, batminton;
+
 
         football = getView().findViewById(R.id.footballimage);
         basketball = getView().findViewById(R.id.basketballimage);
@@ -54,6 +56,7 @@ public class Sports extends Fragment {
                 if (getActivity() instanceof MainActivity) {
                     ((MainActivity) getActivity()).switchFragments(
                             ((MainActivity) getActivity()).footballVideosFragment);
+
                 }
             }
         });

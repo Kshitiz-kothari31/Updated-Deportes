@@ -5,10 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
     Fragment sportsFragment = new Sports();
     Fragment activeFragment;
     ExtendedFloatingActionButton aiBtn, addpost;
-    TextView toolbarTitle;
     Toolbar topToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
 //        ImageView chatIcon = findViewById(R.id.bottom_chat_icon);
         topToolbar = findViewById(R.id.top_toolbar);
 
-        toolbarTitle = findViewById(R.id.toolbar_title);
-
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_content, sportsFragment, "Sports")
                 .hide(sportsFragment)
@@ -91,27 +86,19 @@ public class MainActivity extends AppCompatActivity {
                 .hide(profileFragment)
                 .commit();
 
-//        getSupportFragmentManager().beginTransaction()
-//                .add(R.id.main_content, )
-
         activeFragment = homeFragment;
 
         homeIcon.setOnClickListener(v -> {
             switchFragments(homeFragment);
             topToolbar.setVisibility(View.VISIBLE);
-            toolbarTitle.setText("Home");
         });
         sportsIcon.setOnClickListener(v -> {
             switchFragments(sportsFragment);
             topToolbar.setVisibility(View.VISIBLE);
-            toolbarTitle.setText("Sports");
         });
 
-        int profileIconPrev = R.drawable.profileicon;
         profileIcon.setOnClickListener(v -> {
             switchFragments(profileFragment);
-            topToolbar.setVisibility(View.GONE);
-            toolbarTitle.setText("Profile");
         });
 
         aiBtn = findViewById(R.id.aiBtn);
@@ -136,23 +123,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    SupabaseStorageHelper storageHelper = new SupabaseStorageHelper(MyApplication.supabaseClient);
-//
-//    storageHelper.uploadImage(imageFile, userId, new SupabaseStorageHelper.UploadCallback() {
-//        @Override
-//        public void onSuccess(String imageUrl) {
-//            // Image uploaded! Use imageUrl to create a post or display the image
-//        }
-//
-//        @Override
-//        public void onFailure(Exception e) {
-//            // Handle upload error here
-//            e.printStackTrace();
-//        }
-//    });
-
     public void switchFragments(Fragment targetFragment){
         if(activeFragment != targetFragment){
+            Log.d("FragmentSwitch", "Switching to: " + targetFragment.getClass().getSimpleName());
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.hide(activeFragment);
             transaction.show(targetFragment);

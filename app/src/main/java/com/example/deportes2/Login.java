@@ -128,25 +128,28 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     String jsonResponse = response.body().string();
-                    JSONObject jsonObject = null;
                     try {
-                        jsonObject = new JSONObject(jsonResponse);
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                    String accessToken = null;
-                    try {
-                        accessToken = jsonObject.getString("access_token");
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+                        JSONObject jsonObject = new JSONObject(jsonResponse);
+                        String accessToken = jsonObject.getString("access_token");
 
-                    SharedPreferences prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
-                    prefs.edit().putString("access_token", accessToken).apply();
+                        JSONObject userObject = jsonObject.getJSONObject("user"); // ✅ Fix here
+                        String userId = userObject.getString("id");
 
-                    Intent intent = new Intent(Login.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                        SharedPreferences.Editor editor = getSharedPreferences("AuthPrefs", MODE_PRIVATE).edit();
+                        editor.putString("access_token", accessToken);
+                        editor.putString("user_id", userId);
+                        editor.apply();
+
+                        runOnUiThread(() -> {
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        });
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                        runOnUiThread(() ->
+                                Toast.makeText(Login.this, "Login parsing error", Toast.LENGTH_SHORT).show());
+                    }
                 } else {
                     String error = response.body().string();
                     runOnUiThread(() -> Toast.makeText(Login.this, "Create your account!", Toast.LENGTH_LONG).show());

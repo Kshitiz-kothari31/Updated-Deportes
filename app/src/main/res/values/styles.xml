@@ -10,6 +10,7 @@
     <style name="roundedImageView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+        <item name="color">@color/grey</item>
     </style>
 
     <style name="FloatingActionButtonStyle" parent="Widget.Design.FloatingActionButton">
