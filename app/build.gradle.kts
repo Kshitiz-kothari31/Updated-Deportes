@@ -27,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     buildFeatures{
         viewBinding = true
@@ -36,22 +36,27 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.media3:media3-exoplayer:1.6.1")
-    implementation ("com.cloudinary:cloudinary-android:3.0.2")
-    implementation ("com.android.volley:volley:1.2.1")
+    implementation("androidx.media3:media3-exoplayer:1.6.1")
+    implementation("com.cloudinary:cloudinary-android:3.0.2")
+    implementation("com.android.volley:volley:1.2.1")
     implementation("com.google.android.material:material:1.12.0")
-    implementation ("com.google.ai.client.generativeai:generativeai:0.9.0")
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
     implementation("com.google.guava:guava:31.0.1-android")
     implementation("org.reactivestreams:reactive-streams:1.0.4")
     implementation(libs.media3.ui)
     implementation(libs.firebase.auth)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+
     val fragment_version = "1.6.1"
     implementation("androidx.fragment:fragment:$fragment_version")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("androidx.cardview:cardview:1.0.0")
 }
