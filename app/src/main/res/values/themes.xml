@@ -8,4 +8,9 @@
     </style>
 
     <style name="Theme.Deportes2" parent="Base.Theme.Deportes2" />
+
+    <style name="ThemeOverlay.Deportes2.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
 </resources>

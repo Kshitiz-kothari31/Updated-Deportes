@@ -1,6 +1,7 @@
 package com.example.deportes2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,12 +23,27 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class signUp extends AppCompatActivity {
 
     private EditText email, password, confirmPassword;
     private AppCompatButton signupBtn;
     private TextView login_page;
-    private FirebaseAuth mAuth;
+
+    String supabaseProjectUrl = "https://rgjgyfnwqzgpgqfihcrd.supabase.co";
+    String supabaseApiKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnamd5Zm53cXpncGdxZmloY3JkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgwNTM2MzQsImV4cCI6MjA2MzYyOTYzNH0.WHv-2iO_5hUkcfCZeF1e2WX-YI4zEw2gMmshaRq1LB4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +56,6 @@ public class signUp extends AppCompatActivity {
             return insets;
         });
 
-        mAuth = FirebaseAuth.getInstance();
-
         email = findViewById(R.id.email);
         password = findViewById(R.id.Password);
         confirmPassword = findViewById(R.id.confirmPassword);
@@ -53,64 +67,107 @@ public class signUp extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(signUp.this, Login.class);
                 startActivity(intent);
+                finish();
             }
         });
 
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signupUser();
+
+                String user_email = email.getText().toString().trim();
+                String user_password = password.getText().toString().trim();
+                String user_confirmPass = confirmPassword.getText().toString().trim();
+
+                if (TextUtils.isEmpty(user_email)) {
+                    email.setError("Email is required!");
+                    email.requestFocus();
+                    return;
+                } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(user_email).matches()) {
+                    email.setError("Enter a valid email!");
+                    email.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(user_password)) {
+                    password.setError("Password is required!");
+                    password.requestFocus();
+                    return;
+                } else if (user_password.length() < 6) {
+                    password.setError("Password must be at least 6 characters!");
+                    password.requestFocus();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(user_confirmPass)){
+                    confirmPassword.setError("Confirm your password!");
+                    confirmPassword.requestFocus();
+                    return;
+                }else if(!user_password.equals(user_confirmPass)){
+                    confirmPassword.setError("Passwords do not match!");
+                    confirmPassword.requestFocus();
+                    return;
+                }
+
+                signupUser(user_email, user_confirmPass);
             }
         });
     }
 
-    private void signupUser() {
-        String Email = email.getText().toString().trim();
-        String Password = password.getText().toString().trim();
-        String ConfirmPassword = confirmPassword.getText().toString().trim();
+    private void signupUser(String input_email, String input_password) {
+        OkHttpClient client = new OkHttpClient();
 
-        if (TextUtils.isEmpty(Email)) {
-            email.setError("Email is required.");
-            return;
-        }
+        String json = "{ \"email\": \"" + input_email + "\", \"password\": \"" + input_password + "\" }";
 
-        if (TextUtils.isEmpty(Password)) {
-            password.setError("Password is required.");
-            return;
-        }
+        RequestBody body = RequestBody.create(
+                json, MediaType.parse("application/json"));
 
-        if (TextUtils.isEmpty(ConfirmPassword)) {
-            confirmPassword.setError("Confirm Password is required.");
-            return;
-        }
+        Request request = new Request.Builder()
+                .url(supabaseProjectUrl + "/auth/v1/signup")
+                .post(body)
+                .addHeader("apiKey", supabaseApiKey)
+                .addHeader("Content-Type", "application/json")
+                .build();
 
-        if (Password.length() < 6) {
-            password.setError("Password must be at least 6 characters.");
-            return;
-        }
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText( signUp.this, "Network error", Toast.LENGTH_SHORT).show());
+            }
 
-        if (!Password.equals(ConfirmPassword)) {
-            confirmPassword.setError("Passwords do not match.");
-            return;
-        }
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseData = response.body().string();
+                    try {
+                        JSONObject jsonObject = new JSONObject(responseData);
+                        String accessToken = jsonObject.getString("access_token");
+                        String userId = jsonObject.getJSONObject("user").getString("id");
 
-        mAuth.createUserWithEmailAndPassword(Email, Password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(signUp.this, "Signup successful.",
-                                    Toast.LENGTH_SHORT).show();
+//                        SharedPreferences prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+//                        prefs.edit().putString("access_token", accessToken).apply();
 
+                        SharedPreferences.Editor editor = getSharedPreferences("AuthPrefs", MODE_PRIVATE).edit();
+                        editor.putString("access_token", accessToken);
+                        editor.putString("user_id", userId);
+                        editor.apply();
+
+                        runOnUiThread(() -> {
                             Intent intent = new Intent(signUp.this, MainActivity.class);
                             startActivity(intent);
                             finish();
-                        } else {
-                            Toast.makeText(signUp.this, "Signup failed." + task.getException().getMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
+                        });
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                        runOnUiThread(() -> Toast.makeText(signUp.this, "Signup JSON parsing failed", Toast.LENGTH_SHORT).show());
                     }
-                });
+                } else {
+                    String error = response.body().string();
+                    runOnUiThread(() -> Toast.makeText(signUp.this, "Signup failed: " + error, Toast.LENGTH_LONG).show());
+                }
+            }
+        });
     }
+
 }

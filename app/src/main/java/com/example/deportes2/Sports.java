@@ -3,6 +3,7 @@ package com.example.deportes2;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,11 +11,14 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -31,6 +35,7 @@ public class Sports extends Fragment {
         if (!isNetworkAvailable()) {
             showInternetDialog();
         }
+
     }
 
     @Nullable
@@ -51,6 +56,13 @@ public class Sports extends Fragment {
             getActivity().startActivityForResult(intent, 100); // this matches MainActivity
         });
 
+        football = getView().findViewById(R.id.footballimage);
+        basketball = getView().findViewById(R.id.basketballimage);
+        tabletenis = getView().findViewById(R.id.tabletenisimage);
+        volleyball = getView().findViewById(R.id.volleyballimage);
+        swimming = getView().findViewById(R.id.swimmingimage);
+        batminton = getView().findViewById(R.id.batmintonimage);
+
         // Initialize sport icons
         ShapeableImageView football = view.findViewById(R.id.footballimage);
         ShapeableImageView basketball = view.findViewById(R.id.basketballimage);
@@ -64,6 +76,14 @@ public class Sports extends Fragment {
             if (getActivity() instanceof MainActivity) {
                 ((MainActivity) getActivity()).switchFragments(
                         ((MainActivity) getActivity()).footballVideosFragment);
+        football.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getActivity() instanceof MainActivity) {
+                    ((MainActivity) getActivity()).switchFragments(
+                            ((MainActivity) getActivity()).footballVideosFragment);
+
+                }
             }
         });
 

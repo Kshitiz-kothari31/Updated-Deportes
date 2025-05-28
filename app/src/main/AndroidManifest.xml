@@ -7,6 +7,8 @@
         android:name="android.permission.INTERNET"
         android:protectionLevel="normal" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,6 +21,10 @@
         android:usesCleartextTraffic="true"
         tools:ignore="MissingClass"
         tools:targetApi="31">
+        <activity
+            android:name=".WritePost"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".AboutUsActivity"
             android:exported="false" />

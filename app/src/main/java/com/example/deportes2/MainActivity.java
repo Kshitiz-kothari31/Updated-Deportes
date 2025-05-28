@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -31,13 +32,17 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     public Fragment basketballVideosFragment = new fragment_Basketball_videos();
+    public Fragment footballVideosFragment = new football_videos();
+
+    Fragment profileFragment = new FullscreenProfileFragment();
+//    Fragment chatFragment = new
     Fragment homeFragment = new HomeCommunity();
     Fragment sportsFragment = new Sports();
     public Fragment footballVideosFragment = new football_videos();
     Fragment activeFragment;
-    ExtendedFloatingActionButton aiBtn;
-    TextView toolbarTitle;
-    private FirebaseAuth mAuth;
+    ExtendedFloatingActionButton aiBtn, addpost;
+    Toolbar topToolbar;
+
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -82,19 +87,20 @@ public class MainActivity extends AppCompatActivity {
 //        search activity  completed on 24 may
 
 
-        SharedPreferences sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE);
-        boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
-        if(isFirstTime){
-            startActivity(new Intent(MainActivity.this, Login.class));
+        SharedPreferences prefs = getSharedPreferences("AuthPrefs", MODE_PRIVATE);
+        String token = prefs.getString("access_token", null);
 
-            SharedPreferences.Editor editor =  sharedPreferences.edit();
-            editor.putBoolean("isFirstTime", false);
-            editor.apply();
+        if(token == null){
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            finish();
         }
 
         ImageView homeIcon = findViewById(R.id.bottom_home_icon);
         ImageView sportsIcon = findViewById(R.id.bottom_sports_icon);
-        toolbarTitle = findViewById(R.id.toolbar_title);
+        ImageView profileIcon = findViewById(R.id.bottom_profile_icon);
+//        ImageView chatIcon = findViewById(R.id.bottom_chat_icon);
+        topToolbar = findViewById(R.id.top_toolbar);
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_content, sportsFragment, "Sports")
@@ -115,15 +121,24 @@ public class MainActivity extends AppCompatActivity {
                 .add(R.id.main_content, homeFragment, "Home")
                 .commit();
 
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.main_content, profileFragment, "Profile")
+                .hide(profileFragment)
+                .commit();
+
         activeFragment = homeFragment;
 
         homeIcon.setOnClickListener(v -> {
             switchFragments(homeFragment);
-            toolbarTitle.setText("Home");
+            topToolbar.setVisibility(View.VISIBLE);
         });
         sportsIcon.setOnClickListener(v -> {
             switchFragments(sportsFragment);
-            toolbarTitle.setText("Sports");
+            topToolbar.setVisibility(View.VISIBLE);
+        });
+
+        profileIcon.setOnClickListener(v -> {
+            switchFragments(profileFragment);
         });
 
         aiBtn = findViewById(R.id.aiBtn);
@@ -132,6 +147,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ai_chat.class);
                 startActivity(intent);
+            }
+        });
+
+        addpost = findViewById(R.id.addPost);
+        addpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WritePost.class);
+                startActivity(intent);
+
+                overridePendingTransition(R.anim.slide_in_bottom, R.anim.slide_out_bottom);
             }
         });
 
@@ -164,6 +190,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void switchFragments(Fragment targetFragment){
         if(activeFragment != targetFragment){
+            Log.d("FragmentSwitch", "Switching to: " + targetFragment.getClass().getSimpleName());
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.hide(activeFragment);
             transaction.show(targetFragment);
@@ -190,6 +217,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
 }
 
 class CloudinaryManager {
